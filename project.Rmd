@@ -1,0 +1,32 @@
+---
+title: "Data Products Wk3"
+author: "Adam Carr"
+date: "10/03/2017"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Slide with Plot
+
+This is a plot of tooth length and dose variables from the ToothGrowth dataset.
+
+```{r plotly.chart, warning=FALSE,message=FALSE}
+library(plotly, quietly = TRUE);
+library(ggplot2, quietly = TRUE);
+library(datasets)
+data <- ToothGrowth
+
+g <- ggplot(data=data, aes(x=dose, y=len, colour=supp)) +guides(fill=FALSE)
+g <- g + geom_point() 
+g <- g + geom_smooth()
+g <- g + labs(title="Plot - tooth length vs dose per supplement",
+              y="tooth length", 
+              x="dose") 
+# change facet and print
+g <- g + facet_grid(.~supp)
+
+ggplotly(g)
+```
